@@ -19,6 +19,7 @@ def deleteMatches():
     DB.commit()
     DB.close()
 
+
 def deletePlayers():
     """Remove all the player records from the database."""
     DB = connect()
@@ -26,6 +27,7 @@ def deletePlayers():
     c.execute("DELETE FROM players")
     DB.commit()
     DB.close()
+
 
 def countPlayers():
     """Returns the number of players currently registered."""
@@ -57,8 +59,8 @@ def registerPlayer(name):
 def playerStandings():
     """Returns a list of the players and their win records, sorted by wins.
 
-    The first entry in the list should be the player in first place, or a player
-    tied for first place if there is currently a tie.
+    The first entry in the list should be the player in first place, or a
+    player tied for first place if there is currently a tie.
 
     Returns:
       A list of tuples, each of which contains (id, name, wins, matches):
@@ -85,7 +87,11 @@ def reportMatch(winner, loser):
     """
     DB = connect()
     c = DB.cursor()
-    c.execute("INSERT INTO matches(winner_id, loser_id) VALUES (%s, %s)", (winner, loser,))
+    c.execute(
+        "INSERT INTO matches(winner_id, loser_id) VALUES (%s, %s)",
+        (winner,
+         loser,
+         ))
     DB.commit()
     DB.close()
 
@@ -119,4 +125,3 @@ def swissPairings():
     DB.close()
 
     return pairs
-
